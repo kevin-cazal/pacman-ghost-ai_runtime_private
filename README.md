@@ -1,11 +1,12 @@
-# Pac-Man Ghost AI
+# Pac-Man Ghost AI — runtime
 
-Ateliers pour programmer l'intelligence du fantôme de Pac-Man (code élève en **Lua**, moteur de jeu en JavaScript).
+Le moteur de l'atelier « IA du fantôme de Pac-Man » : le jeu, l'éditeur de code, et le pont Lua
+qui exécute le code de l'élève. Code élève en **Lua** (via Fengari), moteur de jeu en JavaScript.
 
-## Ateliers
-
-- [Atelier 1 — Arbre de décision](WORKSHOP_starter.md) — construire les infos du fantôme et écrire ses règles de direction
-- [Atelier 2 — Machine à états finis](WORKSHOP_fsm.md) — patrouille, poursuite et peur (super pac-gomme)
+**Ce dépôt ne contient pas les instructions de l'atelier.** Elles vivent dans
+[pacman-ghost-ai_new](https://github.com/kevin-cazal/pacman-ghost-ai_new) et sont affichées par la
+plateforme, à côté de ce runtime. Ce dépôt reste utilisable seul : il ouvre directement sur le jeu
+et l'éditeur.
 
 ## Développement local
 
@@ -17,4 +18,12 @@ npx playwright install chromium
 npm run test:all
 ```
 
-Puis servir le dossier avec un serveur HTTP statique (les modules ES et le chargement du template Lua nécessitent HTTP).
+Puis servir le dossier avec un serveur HTTP statique (les modules ES et le chargement du template
+Lua nécessitent HTTP).
+
+## Intégration dans une plateforme
+
+Le runtime est monté dans une iframe de même origine et pilote un petit protocole postMessage
+(WRP). Il n'a besoin d'aucun code spécifique pour cela : l'adaptateur est injecté par l'hôte. Le
+code de l'élève est sauvegardé automatiquement dans `localStorage`, clé
+`mini_pacman_ghost_ai_lua_v1`.
